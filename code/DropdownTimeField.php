@@ -7,8 +7,8 @@
 class DropdownTimeField extends TimeField {
 	
 	static function Requirements() {
-		Requirements::javascript( SAPPHIRE_DIR . '/javascript/DropdownTimeField.js' );
-		Requirements::css( SAPPHIRE_DIR . '/css/DropdownTimeField.css' );
+		Requirements::javascript('legacydatetimefields/javascript/DropdownTimeField.js' );
+		Requirements::css('legacydatetimefields/css/DropdownTimeField.css' );
 	}
 	
 	static function HTMLField( $id, $name, $val ) {
