@@ -22,7 +22,7 @@ class DMYDateField extends CalendarDateField {
 	function Field() {
 		Requirements::javascript(SAPPHIRE_DIR . "/javascript/CalendarDateField.js");
 
-		$field = DateField::Field();
+		$field = LegacyDateField::Field();
 
 		$id = $this->id();
 		$val = $this->attrValue();
