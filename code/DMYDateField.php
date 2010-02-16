@@ -74,7 +74,7 @@ HTML;
 			return '';
 		}
 		$formID = $this->form->FormName(); 
-		$error = _t('DateField.VALIDATIONJS', 'Please enter a valid date format (DD/MM/YYYY).');
+		$error = _t('LegacyDateField.VALIDATIONJS', 'Please enter a valid date format (DD/MM/YYYY).');
 		$error = 'Please enter a valid date format (DD/MM/YYYY) from dmy.';
 		$jsFunc =<<<JS
 Behaviour.register({

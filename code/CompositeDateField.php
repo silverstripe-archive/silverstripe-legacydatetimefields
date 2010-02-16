@@ -4,7 +4,7 @@
  * @package forms
  * @subpackage fields-datetime
  */
-class CompositeDateField extends DateField {
+class CompositeDateField extends LegacyDateField {
 
 	function __construct($name, $title, $value = null, $yearRange = null){
 		$exploded = explode('-', $value); 
@@ -151,7 +151,7 @@ JS;
  * @package forms
  * @subpackage fields-datetime
  */
-class CompositeDateField_Disabled extends DateField {
+class CompositeDateField_Disabled extends LegacyDateField {
 	
 	protected $disabled = true;
 	

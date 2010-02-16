@@ -4,7 +4,7 @@
  * @package forms
  * @subpackage fields-datetime
  */
-class DropdownTimeField extends TimeField {
+class DropdownTimeField extends LegacyTimeField {
 	
 	static function Requirements() {
 		Requirements::javascript('legacydatetimefields/javascript/DropdownTimeField.js' );

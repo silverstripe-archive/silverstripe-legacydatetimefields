@@ -8,11 +8,11 @@
  * @package forms
  * @subpackage fields-datetime
  */
-class DateField extends TextField {
+class LegacyDateField extends TextField {
 	
 	/**
 	 * Enable DD/MM/YYYY field format validation
-	 * in {@link DateField->validate()}. Set to
+	 * in {@link LegacyDateField->validate()}. Set to
 	 * FALSE to disable this validation.
 	 * 
 	 * @var boolean
@@ -44,7 +44,7 @@ class DateField extends TextField {
 	}
 	
 	function performReadonlyTransformation() {
-		$field = new DateField_Disabled($this->name, $this->title, $this->value);
+		$field = new LegacyDateField_Disabled($this->name, $this->title, $this->value);
 		$field->setForm($this->form);
 		$field->readonly = true;
 		return $field;
@@ -57,7 +57,7 @@ class DateField extends TextField {
 			return true;
 		}
 		
-		$error = _t('DateField.VALIDATIONJS', 'Please enter a valid date format (DD/MM/YYYY).');
+		$error = _t('LegacyDateField.VALIDATIONJS', 'Please enter a valid date format (DD/MM/YYYY).');
 		$jsFunc =<<<JS
 Behaviour.register({
 	"#$formID": {
@@ -100,7 +100,7 @@ JS;
 		{
 			$validator->validationError(
 				$this->name, 
-				_t('DateField.VALIDDATEFORMAT', "Please enter a valid date format (DD/MM/YYYY)."), 
+				_t('LegacyDateField.VALIDDATEFORMAT', "Please enter a valid date format (DD/MM/YYYY)."), 
 				"validation", 
 				false
 			);
@@ -111,12 +111,12 @@ JS;
 }
 
 /**
- * Disabled version of {@link DateField}.
+ * Disabled version of {@link LegacyDateField}.
  * Allows dates to be represented in a form, by showing in a user friendly format, eg, dd/mm/yyyy.
  * @package forms
  * @subpackage fields-datetime
  */
-class DateField_Disabled extends DateField {
+class LegacyDateField_Disabled extends LegacyDateField {
 	
 	protected $disabled = true;
 	
@@ -139,7 +139,7 @@ class DateField_Disabled extends DateField {
 				$val = Convert::raw2xml($this->value . ', ' . $df->Ago());
 			}
 		} else {
-			$val = '<i>('._t('DateField.NOTSET', 'not set').')</i>';
+			$val = '<i>('._t('LegacyDateField.NOTSET', 'not set').')</i>';
 		}
 		
 		return "<span class=\"readonly\" id=\"" . $this->id() . "\">$val</span>

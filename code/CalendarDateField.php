@@ -4,7 +4,7 @@
  * @package forms
  * @subpackage fields-datetime
  */
-class CalendarDateField extends DateField {
+class CalendarDateField extends LegacyDateField {
 	protected $futureOnly;
 	
 	static function HTMLField( $id, $name, $val ) {

@@ -5,7 +5,7 @@
  * @package forms
  * @subpackage fields-datetime
  */
-class TimeField extends TextField {
+class LegacyTimeField extends TextField {
 
 	/**
 	 * @var string $timeformat Time description compatible with date() syntax.
@@ -48,17 +48,17 @@ class TimeField extends TextField {
 	 * Creates a new readonly field specified below
 	 */
 	function performReadonlyTransformation() {
-		return new TimeField_Readonly( $this->name, $this->title, $this->dataValue(),$this->timeformat);
+		return new LegacyTimeField_Readonly( $this->name, $this->title, $this->dataValue(),$this->timeformat);
 	}
 	
 }
 
 /**
- * The readonly class for our {@link TimeField}.
+ * The readonly class for our {@link LegacyTimeField}.
  * @package forms
  * @subpackage fields-datetime
  */
-class TimeField_Readonly extends TimeField {
+class LegacyTimeField_Readonly extends LegacyTimeField {
 	
 	protected $readonly = true;
 	
