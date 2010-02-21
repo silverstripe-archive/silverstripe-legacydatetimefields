@@ -6,6 +6,8 @@
  */
 class CalendarDateField extends LegacyDateField {
 	protected $futureOnly;
+	protected $mustBeBefore = null;
+	protected $mustBeAfter = null;
 	
 	static function HTMLField( $id, $name, $val ) {
 		return <<<HTML
@@ -29,14 +31,22 @@ HTML;
 		$val = $this->attrValue();
 		
 		$futureClass = $this->futureOnly ? ' futureonly' : '';
-		
-		$innerHTML = self::HTMLField( $id, $this->name, $val );
+				$attrs = ($this->mustBeAfter ? " after=\"{$this->mustBeAfter}\" " : '') . ($this->mustBeBefore ? " before=\"{$this->mustBeBefore}\"" : '');
+		$innerHTML = self::HTMLField( $id, $this->name, $val, $attrs );
 		
 		return <<<HTML
 			<div class="calendardate$futureClass">
 				$innerHTML
 			</div>
 HTML;
+	}
+	
+	function mustBeAfter($fieldName) {
+		$this->mustBeAfter = $fieldName;
+	}
+	
+	function mustBeBefore($fieldName) {
+		$this->mustBeBefore = $fieldName;
 	}
 	
 	/**

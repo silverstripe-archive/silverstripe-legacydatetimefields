@@ -8,7 +8,17 @@
  * @subpackage fields-datetime
  */
 class PopupDateTimeField extends CalendarDateField {
-
+	protected $defaultToEndOfDay = false;
+	protected $allowOnlyTime = true;
+	
+	function defaultToEndOfDay($default = true) {
+		$this->defaultToEndOfDay = $default;
+	}
+	
+	function allowOnlyTime($default = true) {
+		$this->allowOnlyTime = $default;
+	}
+	
 	/**
 	 * @todo js validation needs to be implemented.
 	 */
@@ -41,11 +51,14 @@ class PopupDateTimeField extends CalendarDateField {
 		$innerHTMLDate = parent::HTMLField( $id . '_Date', $this->name . '[Date]', $date );
 		$innerHTMLTime = DropdownTimeField::HTMLField( $id . '_Time', $this->name . '[Time]', $time );
 
+		$attrs = ($this->mustBeAfter ? " after=\"{$this->mustBeAfter}\" " : '') . ($this->mustBeBefore ? " before=\"{$this->mustBeBefore}\"" : '');
+		$defaultTime = $this->defaultToEndOfDay ? '11:59 pm' : '12:00 am';
+		
 		return <<<HTML
-			<div class="popupdatetime">
+			<div$attrs id="$id" name="{$this->name}" class="popupdatetime">
 				<ul>
 					<li class="calendardate$futureClass">$innerHTMLDate</li>
-					<li class="dropdowntime">$innerHTMLTime</li>
+					<li class="dropdowntime" defaultTime="$defaultTime">$innerHTMLTime</li>
 				</ul>
 			</div>
 HTML;
@@ -59,10 +72,16 @@ HTML;
 	}
 
 	function attrValueTime() {
-		if( $this->value )
+		if ($this->value) {
+			// Try to detect if a time was specificied.
+			$noTime = strlen($this->value) <12 && strpos($this->value, 'am') === false && strpos($this->value, 'pm') === false;
+			if ($noTime && $this->defaultToEndOfDay) {
+				return '11:59 pm';
+			}
 			return date( 'h:i a', strtotime( $this->value ) );
-		else
+		} else {
 			return '';
+		}
 	}
 
 	function setValue( $val ) {
@@ -80,14 +99,26 @@ HTML;
 			$time = $val[ 'Time' ] ? date( 'H:i:s', strtotime( $val[ 'Time' ] ) ) : null;
 
 			if( $date == null )
-				$this->value = $time;
+				$this->value = $this->allowOnlyTime ? $time : null;
 			else if( $time == null )
-				$this->value = $date;
+				if ($this->defaultToEndOfDay) { $this->value = $date.' 23:59:59'; }
+				else { $this->value = $date; }
 			else
 				$this->value = $date . ' ' . $time;
 		}
 		else
 			$this->value = $val;
+	}
+	
+	/**
+	 * Get an SSDatetime object representing the converted
+	 * time. Used to access the helper methods that SSDatetime
+	 * provides
+	 */
+	function SSDatetime() {
+		$datetime = new SSDatetime($this->name);
+		$datetime->setValue($this->value);
+		return $datetime;
 	}
 
 	function dataValue() {
