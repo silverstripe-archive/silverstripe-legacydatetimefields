@@ -116,7 +116,7 @@ HTML;
 	 * provides
 	 */
 	function SSDatetime() {
-		$datetime = new SSDatetime($this->name);
+		$datetime = new SS_Datetime($this->name);
 		$datetime->setValue($this->value);
 		return $datetime;
 	}
