@@ -58,7 +58,7 @@ class CompositeDateField extends LegacyDateField {
 
 	function customiseYearDropDown($name, $yearRange, $year){
 		list($from,$to) = explode('-', $yearRange);
-		$source['NotSet'] = '(Year)';
+		$source['NotSet'] = '(' . _t('CompositeDateField.YEAR', 'Year') . ')';
 		for($i = $to; $i >= $from; $i--){
 			$source[$i]=$i;
 		}
