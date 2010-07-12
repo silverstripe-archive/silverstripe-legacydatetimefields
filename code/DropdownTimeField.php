@@ -14,7 +14,7 @@ class DropdownTimeField extends LegacyTimeField {
 	static function HTMLField( $id, $name, $val ) {
 		return <<<HTML
 			<input type="text" id="$id" name="$name" value="$val"/>
-			<img src="sapphire/images/clock-icon.gif" id="$id-icon"/>
+			<img class="timeIcon" src="sapphire/images/clock-icon.gif" id="$id-icon"/>
 			<div class="dropdownpopup" id="$id-dropdowntime"></div>
 HTML;
 	}
