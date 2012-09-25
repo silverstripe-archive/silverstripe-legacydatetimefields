@@ -1,0 +1,16 @@
+{
+	"name": "silverstripe-labs/legacydatetimefields",
+	"description": "Implementations of various date/time form fields which were pulled out of the 2.4 release.",
+	"type": "silverstripe-module",
+	"keywords": ["silverstripe-labs", "legacydatetimefields", "calendar", "forms"],
+	"authors": [
+	{
+		"name": "Ingo Schommer",
+		"email": "ingo@silverstripe.com"
+	}
+	],
+	"require":
+	{
+		"silverstripe/framework": ">=2.4.0-beta3"
+	}
+}
